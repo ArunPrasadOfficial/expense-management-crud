@@ -103,67 +103,7 @@ Then open `http://127.0.0.1:5500` in the browser (with the Django server also ru
 | DELETE | /api/expenses/<id>/      | Delete an expense          |
 | GET    | /api/expenses/summary/   | Total count & sum (extra)  |
 
-### Query parameters (GET /api/expenses/)
-- `?search=grocery` — search title/description
-- `?category=Food` — filter by category
-- `?date=2026-01-20` — exact date
-- `?date_from=2026-01-01&date_to=2026-01-31` — date range
-- `?ordering=-amount` — sort
 
-## Postman Test Examples
-
-**Create expense — POST** `http://127.0.0.1:8000/api/expenses/`
-```json
-{
-  "title": "Grocery Shopping",
-  "amount": 850.50,
-  "category": "Food",
-  "date": "2026-09-10",
-  "payment_method": "UPI",
-  "description": "Weekly groceries"
-}
-```
-
-**Invalid amount (should return 400) — POST**
-```json
-{
-  "title": "Bad Entry",
-  "amount": -50,
-  "category": "Food",
-  "date": "2026-09-10"
-}
-```
-
-**Update — PUT** `http://127.0.0.1:8000/api/expenses/1/`
-```json
-{
-  "title": "Grocery Shopping Updated",
-  "amount": 900,
-  "category": "Food",
-  "date": "2026-09-10",
-  "payment_method": "Cash",
-  "description": "Updated groceries"
-}
-```
-
-**Partial update — PATCH** `http://127.0.0.1:8000/api/expenses/1/`
-```json
-{ "amount": 950 }
-```
-
-**Filter by category — GET**
-`http://127.0.0.1:8000/api/expenses/?category=Food`
-
-**Delete — DELETE** `http://127.0.0.1:8000/api/expenses/1/`
-
----
-
-## Running Automated Tests
-
-```bash
-cd backend
-python manage.py test expenses
-```
 
 ## Git / GitHub Commands
 
@@ -196,15 +136,6 @@ This project is an **Expense Management System** that lets a user record daily e
 | 8 | Retrieve expense with invalid id          | 404 Not Found |
 | 9 | Update expense (PUT) with valid data      | 200 OK, fields updated |
 | 10| Partial update (PATCH) amount only        | 200 OK, only amount changes |
-| 11| Delete existing expense                   | 200 OK, removed from DB |
-| 12| Filter expenses by category               | 200 OK, only matching category returned |
-| 13| Filter expenses by date range             | 200 OK, only matching dates returned |
-| 14| Search expense by keyword                 | 200 OK, matching title/description returned |
-| 15| Frontend: submit form with empty title    | Inline validation error shown, no API call |
-| 16| Frontend: submit form with amount = 0     | Inline validation error shown |
-| 17| Frontend: successful create shows message | Green success alert displayed |
-| 18| Frontend: server validation error shown   | Red error alert + field-level message |
-| 19| Frontend: edit populates form correctly   | Form pre-filled with selected expense data |
-| 20| Frontend: delete asks confirmation        | Row removed only after confirm |
 
-Automated versions of test cases 1–14 are implemented in `backend/expenses/tests.py`.
+
+
